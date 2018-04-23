@@ -1094,7 +1094,7 @@ void NAV::LandActive() {
             item->Lat = NAN;
             item->Lon = NAN;
             item->AltitudeIsRelative = false;
-            item->Altitude = HomePosition_ptr->Alt;
+            item->Altitude = VehicleGlobalPosition_ptr->Alt - CVT.VehicleLocalPositionMsg.DistBottom;
             item->Yaw = NAN;
             item->LoiterRadius = nav_params.nav_loiter_rad;
             item->AcceptanceRadius = nav_params.nav_acc_rad;
