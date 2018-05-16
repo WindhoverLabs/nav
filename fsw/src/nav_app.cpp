@@ -799,6 +799,11 @@ int NAV::Execute() {
 
         } else {
             CanLoiterAtSetpoint = false;
+
+            /* Clear hk values revelant to mission if not in auto mode */
+            HkTlm.MissionItemReached = FALSE;
+            HkTlm.WaypointPositionReached = FALSE;
+	        HkTlm.WaypointYawReached = FALSE;
         }
     }
 

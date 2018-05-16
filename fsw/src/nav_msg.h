@@ -47,7 +47,6 @@ extern "C" {
 
 #include "cfe.h"
 #include "px4_msgs.h"
-#include "nav_app.h"
 
 /************************************************************************
  ** Local Defines
