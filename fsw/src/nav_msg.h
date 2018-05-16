@@ -47,6 +47,7 @@ extern "C" {
 
 #include "cfe.h"
 #include "px4_msgs.h"
+#include "nav_app.h"
 
 /************************************************************************
  ** Local Defines
@@ -155,6 +156,33 @@ typedef struct
     /** \navtlmmnemonic \NAV_CMDRJCTCNT
      \brief Count of failed commands */
     uint8 usCmdErrCnt;
+
+    /* \brief Current nav state */
+    PX4_NavigationState_t NavState;
+
+    /* \brief RTL state  */
+	uint32 RtlState;
+
+    /* \brief Flag for if current mission waypoint position is reached */
+	boolean WaypointPositionReached;
+
+    /* \brief Flag for if current mission waypoint yaw is reached */
+	boolean WaypointYawReached;
+
+    /* \brief Force descent flag */
+	boolean RtlForceDescentExecuting;
+
+    /* \brief Force descent completed flag */
+	boolean RtlForceDescentCompleted;
+
+    /* \brief Force descent flag */
+	boolean LandForceDescentExecuting;
+
+    /* \brief Force descent completed flag */
+	boolean LandForceDescentCompleted;
+
+	/* \brief Flag for current mission item reached */
+	boolean MissionItemReached;
 
 }NAV_HkTlm_t;
 

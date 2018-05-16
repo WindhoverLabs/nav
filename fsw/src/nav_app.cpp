@@ -231,6 +231,16 @@ void NAV::InitData() {
     /* Init output messages */
     /*CFE_SB_InitMsg(&VehicleCommandMsgOut,
      PX4_POSITION_SETPOINT_TRIPLET_MID, sizeof(PX4_VehicleCommandMsg_t), TRUE);*/
+
+    HkTlm.NavState = PX4_NAVIGATION_STATE_MANUAL;
+	HkTlm.RtlState = RTL_STATE_NONE;
+    HkTlm.MissionItemReached = FALSE;
+    HkTlm.WaypointPositionReached = FALSE;
+	HkTlm.WaypointYawReached = FALSE;
+	HkTlm.RtlForceDescentExecuting = FALSE;
+	HkTlm.RtlForceDescentCompleted = FALSE;
+	HkTlm.LandForceDescentExecuting = FALSE;
+	HkTlm.LandForceDescentCompleted = FALSE;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -476,6 +486,9 @@ void NAV::ProcessAppCmds(CFE_SB_Msg_t* MsgPtr) {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 void NAV::ReportHousekeeping() {
+	HkTlm.NavState = CVT.VehicleStatusMsg.NavState;
+	HkTlm.RtlState = rtl_state;
+
     CFE_SB_TimeStampMsg((CFE_SB_Msg_t*) &HkTlm);
     CFE_SB_SendMsg((CFE_SB_Msg_t*) &HkTlm);
 }
@@ -1108,10 +1121,8 @@ void NAV::LandActive() {
         }
     }
 
-
-
-
-
+    HkTlm.LandForceDescentExecuting = ForceDescentExecuting;
+    HkTlm.LandForceDescentCompleted = ForceDescentCompleted;
 
 }
 
@@ -1608,6 +1619,9 @@ void NAV::RtlActive() {
         }
 
     }
+
+    HkTlm.RtlForceDescentExecuting = ForceDescentExecuting;
+    HkTlm.RtlForceDescentCompleted = ForceDescentCompleted;
 }
 
 boolean NAV::StateChangeDetect() {
@@ -1797,6 +1811,11 @@ boolean NAV::IsMissionItemReached() {
             isMissionItemReached = true;
         }
     }
+
+    /* Copy values to HK */
+    HkTlm.MissionItemReached = isMissionItemReached;
+    HkTlm.WaypointPositionReached = WaypointPositionReached;
+	HkTlm.WaypointYawReached = WaypointYawReached;
 
     /* All acceptance criteria must be met in the same iteration */
     WaypointPositionReached = false;
