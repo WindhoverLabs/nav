@@ -94,6 +94,8 @@ typedef struct
     PX4_VehicleLocalPositionMsg_t VehicleLocalPositionMsg;
     /** \brief The vehicle command message */
     PX4_VehicleCommandMsg_t VehicleCommandMsg;
+    /** \brief The distance sensor message */
+    PX4_DistanceSensorMsg_t DistanceSensorMsg;
 }NAV_CurrentValueTable_t;
 
 /**
@@ -293,6 +295,10 @@ public:
     boolean MissionResultUpdated {false};
     /** \brief True if position setpoint triplet message is updated by navigation states */
     boolean PositionSetpointTripletUpdated {false};
+
+    float ForceDescentTarget = 0;
+    boolean ForceDescentExecuting = false;
+    boolean ForceDescentCompleted = false;
 
     /************************************************************************/
     /** \brief Navigator (NAV) application entry point
