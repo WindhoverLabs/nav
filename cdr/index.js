@@ -11,7 +11,7 @@ module.exports = class CfeCdrPlugin extends CdrPlugin {
 
   getContent() {
     var result = {
-      shortDescription: 'NAV',
+      shortDescription: 'Vehicle Navigation',
       longDescription: 'Vehicle Navigation Manager.',
       nodes: {
         main: {
