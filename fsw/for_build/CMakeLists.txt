@@ -7,6 +7,7 @@ add_airliner_app_def(nav
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/nav_config_utils.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/nav_events.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/nav_msg.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/nav_symbols.c
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/nav_tbldefs.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/nav_version.h
 
