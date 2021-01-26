@@ -1,5 +1,5 @@
 
-add_airliner_app_def(nav
+buildliner_add_app_def(nav
     FILE NAV
     SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/nav_app.cpp
@@ -21,7 +21,7 @@ add_airliner_app_def(nav
         ${PROJECT_SOURCE_DIR}/apps/nav/fsw/platform_inc
 )
 
-add_airliner_app_unit_test(nav-ut
+buildliner_add_app_unit_test(nav-ut
     UTASSERT
     NO_HELGRIND
     NO_MASSIF
